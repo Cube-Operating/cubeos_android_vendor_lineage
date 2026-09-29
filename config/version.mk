@@ -44,9 +44,21 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.lineage.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
     ro.lineage.releasetype=$(LINEAGE_BUILDTYPE)
 
-# CubeOS version properties
-CUBEOS_VERSION := $(LINEAGE_VERSION)
+# CubeOS version
+# CubeOS numbers its own releases. The LineageOS/Android base it is built on
+# is recorded in ro.cube.base and shown only in legal notices.
+CUBEOS_VERSION_MAJOR := 1
+CUBEOS_VERSION_MINOR := 0
+
+# Internal version, e.g. 1.0-20261001-UNOFFICIAL-sdk_phone_x86_64
+CUBEOS_VERSION := $(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR)-$(LINEAGE_VERSION_SUFFIX)
+
+# Display version, as shown in Settings > About phone
+CUBEOS_DISPLAY_VERSION := $(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR)-$(LINEAGE_VERSION_SUFFIX)
 
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.cubeos.version=$(CUBEOS_VERSION) \
-    ro.cubeos.base=LineageOS-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
+    ro.cube.version=$(CUBEOS_VERSION) \
+    ro.cube.display.version=$(CUBEOS_DISPLAY_VERSION) \
+    ro.cube.build.version=$(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR) \
+    ro.cube.releasetype=$(LINEAGE_BUILDTYPE) \
+    ro.cube.base=LineageOS-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
