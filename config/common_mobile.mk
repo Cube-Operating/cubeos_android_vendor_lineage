@@ -23,9 +23,11 @@ PRODUCT_PACKAGES += \
 # CubeOS: AppHub, the CubeOS app store (packages/apps/AppHub). CubeOS ships no Play Store.
 # Cube Account (packages/apps/CubeAccount): the system-wide Cubemail account, the way the
 # Google account works on other Android phones. AppHub and Settings sign in through it.
+# Cubemail (packages/apps/Cubemail): the mail app, signed in with the Cube Account.
 PRODUCT_PACKAGES += \
     AppHub \
-    CubeAccount
+    CubeAccount \
+    Cubemail
 
 ifeq ($(PRODUCT_TYPE), go)
 PRODUCT_PACKAGES += \
