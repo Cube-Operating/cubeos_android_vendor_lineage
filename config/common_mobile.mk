@@ -20,6 +20,10 @@ PRODUCT_PACKAGES += \
     Glimpse \
     LatinIME
 
+# CubeOS: AppHub, the CubeOS app store (packages/apps/AppHub). CubeOS ships no Play Store.
+PRODUCT_PACKAGES += \
+    AppHub
+
 ifeq ($(PRODUCT_TYPE), go)
 PRODUCT_PACKAGES += \
     TrebuchetQuickStepGo
