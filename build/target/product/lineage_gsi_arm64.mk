@@ -23,6 +23,13 @@ PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 TARGET_NO_KERNEL_OVERRIDE := true
 
 PRODUCT_NAME := lineage_gsi_arm64
+
+# CubeOS: use the threaded RenderEngine. The Cube Phone vendor image (Android 12 era,
+# MT6877) sets debug.renderengine.backend=skiagl; on Android 15 that makes SurfaceFlinger
+# crash in its screenshot path (createScreenCaptureOutput) about a second after every boot,
+# leaving no display. Product properties load after vendor ones, so this value wins.
+PRODUCT_PRODUCT_PROPERTIES += \
+    debug.renderengine.backend=skiaglthreaded
 PRODUCT_DEVICE := generic_arm64
 
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS :=
