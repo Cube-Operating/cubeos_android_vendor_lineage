@@ -25,6 +25,9 @@ $(call soong_config_set,lineage_bootanimation,height,$(TARGET_SCREEN_HEIGHT))
 $(call soong_config_set,lineage_bootanimation,width,$(TARGET_SCREEN_WIDTH))
 $(call soong_config_set,lineage_bootanimation,half_res,$(TARGET_BOOTANIMATION_HALF_RES))
 
+# CubeOS boot animation: a full-screen video piece, shipped prebuilt (see
+# bootanimation/make-bootanimation-from-video.sh). Devices may still override it.
+TARGET_BOOTANIMATION ?= vendor/lineage/bootanimation/cubeos-bootanimation.zip
 ifneq ($(TARGET_BOOTANIMATION),)
 $(call soong_config_set,lineage_bootanimation,prebuilt_file,$(TARGET_BOOTANIMATION))
 endif
