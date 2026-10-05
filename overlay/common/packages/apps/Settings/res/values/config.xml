@@ -36,4 +36,10 @@
     <string name="config_styles_and_wallpaper_picker_class" translatable="false">com.android.customization.picker.CustomizationPickerActivity</string>
     <!-- Action name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_action" translatable="false">android.intent.action.SET_WALLPAPER</string>
+
+    <!-- CubeOS Face Unlock (org.cubeapp.face): Settings confirms the credential and mints the
+         hardware auth token, then hands enrolment to Face Unlock's own ring flow. -->
+    <string name="config_face_enroll" translatable="false">org.cubeapp.face/org.cubeapp.face.ui.FaceActivity</string>
+    <!-- Camera-only face unlock is convenience security: say so on the intro page. -->
+    <bool name="config_face_intro_show_less_secure">true</bool>
 </resources>

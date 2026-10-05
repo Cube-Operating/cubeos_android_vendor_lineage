@@ -1,0 +1,8 @@
+# CubeOS Face Unlock (org.cubeapp.face) runs with the system uid (system_app domain) so the
+# framework's face provider can drive it while the keyguard is up. It needs the camera service.
+# AOSP grants this to priv_app / platform_app / untrusted_app but not to system_app.
+#
+# TODO(cubeos): move Face Unlock into its own domain (seapp_contexts name=org.cubeapp.face)
+# so the rest of system_app (Settings, …) doesn't gain camera access.
+allow system_app cameraserver_service:service_manager find;
+binder_call(system_app, cameraserver)

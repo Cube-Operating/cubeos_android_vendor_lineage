@@ -33,6 +33,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeDEX
 
+# CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
+include vendor/lineage/config/face_unlock.mk
+
 # CubeOS: the thirteen ContiSX apps (vendor/contisx) — Exchange, Shield, Sage, Decision Lab,
 # CSD, Boardroom, Vault, Goals, Collectives and the ContiSX Office apps (Inventory,
 # Accounting, HR, Payments), on one ContiSX account.

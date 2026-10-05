@@ -1,0 +1,90 @@
+From cf158f998ed297a75442907028b38c10df3f7901 Mon Sep 17 00:00:00 2001
+From: Ogemdi Ugoji <ogemdiugoji@gmail.com>
+Date: Mon, 5 Oct 2026 20:22:26 +0100
+Subject: [PATCH 5/5] CubeOS: drive Face Unlock (org.cubeapp.face) as a Class 1
+ face sensor
+
+The FaceSense provider (from AOSPA ParanoidSense via crDroid, Apache-2.0)
+binds a face service in a system app. CubeOS points it at Face Unlock,
+org.cubeapp.face (packages/apps/CubeOSApps/face), whose engine is open
+and on-device (MediaPipe Face Landmarker + OpenCV Zoo SFace), and
+registers the sensor as STRENGTH_CONVENIENCE instead of STRENGTH_WEAK:
+a camera-only match is spoofable by photos and videos, so it may only
+unlock the keyguard - never BiometricPrompt, payments or Keystore keys.
+
+- SenseProvider: bind org.cubeapp.face/.sense.SenseHalService with
+  action org.cubeapp.face.SENSE_BIND.
+- FaceService: FaceSense sensor strength CONVENIENCE.
+- SystemUI: no camera privacy chip for the face scan at the lock screen
+  (as for ParanoidSense); the camera is used only while the keyguard is
+  scanning, which the owner set up and can turn off.
+
+Enabled with ro.face.sense_service=true (vendor/lineage config/common.mk).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../android/systemui/privacy/AppOpsPrivacyItemMonitor.kt  | 4 ++--
+ .../server/biometrics/sensors/face/FaceService.java       | 5 ++++-
+ .../biometrics/sensors/face/sense/SenseProvider.java      | 8 +++++---
+ 3 files changed, 11 insertions(+), 6 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/privacy/AppOpsPrivacyItemMonitor.kt b/packages/SystemUI/src/com/android/systemui/privacy/AppOpsPrivacyItemMonitor.kt
+index cc4ce05..b59e5e4 100644
+--- a/packages/SystemUI/src/com/android/systemui/privacy/AppOpsPrivacyItemMonitor.kt
++++ b/packages/SystemUI/src/com/android/systemui/privacy/AppOpsPrivacyItemMonitor.kt
+@@ -96,7 +96,7 @@ class AppOpsPrivacyItemMonitor @Inject constructor(
+                     return
+                 }
+                 // Hide incoming chip from sense caller package
+-                if (packageName == "co.aospa.sense") {
++                if (packageName == "org.cubeapp.face") {
+                     return
+                 }
+                 if (userTracker.userProfiles.any { it.id == UserHandle.getUserId(uid) } ||
+@@ -224,7 +224,7 @@ class AppOpsPrivacyItemMonitor @Inject constructor(
+             else -> return null
+         }
+         // Hide incoming chip from sense caller package
+-        if (appOpItem.packageName == "co.aospa.sense") {
++        if (appOpItem.packageName == "org.cubeapp.face") {
+             return null
+         }
+         val app = PrivacyApplication(appOpItem.packageName, appOpItem.uid)
+diff --git a/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java b/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
+index 3853d41..0abc0d1 100644
+--- a/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
++++ b/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
+@@ -672,7 +672,10 @@ public class FaceService extends SystemService {
+             final List<ServiceProvider> providers = new ArrayList<>();
+             FaceSensorPropertiesInternal props = new FaceSensorPropertiesInternal(
+                     SenseProvider.DEVICE_ID,
+-                    SensorProperties.STRENGTH_WEAK,
++                    // CubeOS: a camera-only face match is spoofable by photos and videos, so it
++                    // is a Class 1 (convenience) biometric: keyguard only, never BiometricPrompt
++                    // or Keystore auth-bound keys.
++                    SensorProperties.STRENGTH_CONVENIENCE,
+                     1, /** maxEnrollmentsPerUser **/
+                     new ArrayList(),
+                     FaceSensorProperties.TYPE_RGB,
+diff --git a/services/core/java/com/android/server/biometrics/sensors/face/sense/SenseProvider.java b/services/core/java/com/android/server/biometrics/sensors/face/sense/SenseProvider.java
+index 1ec6b11..13991d1 100644
+--- a/services/core/java/com/android/server/biometrics/sensors/face/sense/SenseProvider.java
++++ b/services/core/java/com/android/server/biometrics/sensors/face/sense/SenseProvider.java
+@@ -103,9 +103,11 @@ public class SenseProvider implements ServiceProvider {
+ 
+     private static final String TAG = "SenseProvider";
+ 
+-    private static final String BIND_SENSE_ACTION = "co.aospa.sense.BIND";
+-    private static final String PACKAGE_NAME = "co.aospa.sense";
+-    private static final String SERVICE_NAME = "co.aospa.sense.SenseService";
++    // CubeOS: the face "HAL" is Face Unlock (org.cubeapp.face, packages/apps/CubeOSApps/face),
++    // an open on-device engine; no vendor face libraries are involved.
++    private static final String BIND_SENSE_ACTION = "org.cubeapp.face.SENSE_BIND";
++    private static final String PACKAGE_NAME = "org.cubeapp.face";
++    private static final String SERVICE_NAME = "org.cubeapp.face.sense.SenseHalService";
+ 
+     public static final int DEVICE_ID = 1008;
+     private static final int ENROLL_TIMEOUT_SEC = 75;
+-- 
+2.55.0
+
