@@ -29,4 +29,7 @@
 
     <!-- This is disabled by default, but turned on in SetupWizard -->
     <bool name="assisted_gps_enabled">false</bool>
+
+    <!-- CubeOS: apps open in portrait by default; rotation can be turned on in Control Center. -->
+    <bool name="def_accelerometer_rotation">false</bool>
 </resources>
