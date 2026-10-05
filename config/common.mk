@@ -134,9 +134,11 @@ PRODUCT_PACKAGES += \
 endif
 
 ifeq ($(PRODUCT_IS_AUTOMOTIVE),)
+# CubeOS: Cube Setup (packages/apps/CubeOSApps/setup) is the first-run assistant; it
+# overrides LineageSetupWizard and Provision.
 PRODUCT_PACKAGES += \
     LineageParts \
-    LineageSetupWizard
+    CubeSetup
 endif
 
 PRODUCT_PACKAGES += \
