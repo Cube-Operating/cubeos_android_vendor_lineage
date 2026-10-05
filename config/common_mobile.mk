@@ -33,8 +33,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeDEX
 
-# CubeOS: the ContiSX apps (vendor/contisx) — Exchange, Shield, Sage, Decision Lab and the
-# ContiSX Office apps (Inventory, Accounting, HR, Payments, Meet), on one ContiSX account.
+# CubeOS: the fourteen ContiSX apps (vendor/contisx) — Exchange, Shield, Sage, Decision Lab,
+# CSD, Boardroom, Vault, Goals, Collectives and the ContiSX Office apps (Inventory,
+# Accounting, HR, Payments, Meet), on one ContiSX account.
 $(call inherit-product-if-exists, vendor/contisx/contisx.mk)
 
 ifeq ($(PRODUCT_TYPE), go)
