@@ -29,6 +29,14 @@ PRODUCT_PACKAGES += \
     CubeAccount \
     Cubemail
 
+# CubeOS: CubeDEX (packages/apps/CubeDEX), the Cube decentralised exchange.
+PRODUCT_PACKAGES += \
+    CubeDEX
+
+# CubeOS: the ContiSX apps (vendor/contisx) — Exchange, Shield, Sage, Decision Lab and the
+# ContiSX Office apps (Inventory, Accounting, HR, Payments, Meet), on one ContiSX account.
+$(call inherit-product-if-exists, vendor/contisx/contisx.mk)
+
 ifeq ($(PRODUCT_TYPE), go)
 PRODUCT_PACKAGES += \
     TrebuchetQuickStepGo
