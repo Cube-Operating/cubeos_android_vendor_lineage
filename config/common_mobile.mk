@@ -64,6 +64,11 @@ PRODUCT_PACKAGES += \
     CubeClock \
     CubeRadio
 
+# CubeOS: Cube Camera is THE system camera (prebuilts/CubeCamera; overrides Camera2/Aperture and
+# pulls in CubeCameraSystemUIOverlay so double-press power opens it).
+PRODUCT_PACKAGES += \
+    CubeCamera
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
