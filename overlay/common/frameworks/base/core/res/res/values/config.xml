@@ -179,4 +179,13 @@
     <string name="config_dozeComponent" translatable="false">com.android.systemui/com.android.systemui.doze.DozeService</string>
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
     <bool name="config_dozeAlwaysOnEnabled">true</bool>
+
+    <!-- CubeOS: the network location provider is CubeOS Location (org.cubeapp.location,
+         packages/apps/CubeOSApps/location, Wi-Fi and cell positioning). Pinned to that package
+         instead of "any system package with the action", so nothing else installed in the
+         image can take the role. The system only binds system apps (MATCH_SYSTEM_ONLY).
+         With CUBE_NETWORK_LOCATION := false the package is absent and there is simply no
+         network provider, as before. See config/cube_location.mk. -->
+    <bool name="config_enableNetworkLocationOverlay" translatable="false">false</bool>
+    <string name="config_networkLocationProviderPackageName" translatable="false">org.cubeapp.location</string>
 </resources>
