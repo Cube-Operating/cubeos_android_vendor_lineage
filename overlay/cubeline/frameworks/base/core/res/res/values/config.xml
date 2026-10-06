@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The CubeOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!-- CubeOS: Phone and Messages (packages/apps/CubeOSApps, see config/cubeline.mk) hold the
+     dialer and SMS roles from first boot. RoleManager takes the default holders of
+     android.app.role.DIALER and android.app.role.SMS from these, in place of
+     com.android.dialer / com.android.messaging, which CubePhone and CubeMessages override. -->
+<resources>
+    <string name="config_defaultDialer" translatable="false">org.cubeapp.phone</string>
+    <string name="config_defaultSms" translatable="false">org.cubeapp.messages</string>
+</resources>
