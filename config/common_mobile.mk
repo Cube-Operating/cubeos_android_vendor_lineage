@@ -48,6 +48,11 @@ PRODUCT_PACKAGES += \
     GoSlow \
     PrivateLocker
 
+# CubeOS: Themes & Wallpapers (prebuilts/CubeThemes), signed, updating wallpaper and theme library;
+# applies system accent colours, wallpapers and Cube Home appearance with Undo.
+PRODUCT_PACKAGES += \
+    CubeThemes
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
