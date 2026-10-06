@@ -38,6 +38,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeHealth
 
+# CubeOS: safety and everyday apps (packages/apps/CubeOSApps/prebuilts):
+# Link Checker (checks every tapped link; the default link handler, see overlay),
+# Up NEPA (power-supply tracker; persistent for instant mains detection),
+# Go-Slow (live road intelligence) and Private Locker (hidden encrypted vault).
+PRODUCT_PACKAGES += \
+    LinkChecker \
+    UpNepa \
+    GoSlow \
+    PrivateLocker
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
