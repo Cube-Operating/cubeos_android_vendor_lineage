@@ -76,6 +76,12 @@ PRODUCT_PACKAGES += \
     CubePasswords \
     CubeContactsBackup
 
+# CubeOS: Cube Island (prebuilts/CubeIsland), the live-activity island around the camera cutout:
+# calls, media, timers, navigation, downloads, charging and notification banners. Privileged and
+# persistent (status-bar panel window); not on AppHub.
+PRODUCT_PACKAGES += \
+    CubeIsland
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
