@@ -53,6 +53,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeThemes
 
+# CubeOS: everyday Nigerian essentials (prebuilts). Quick Codes (signed USSD shortcuts + balance
+# checker), Cube Calculator (naira converter; overrides ExactCalculator), Weather (nowcast + flood
+# alerts), Cube Clock (prayer times, Qibla, daily verse; overrides DeskClock) and FM Radio (MediaTek
+# tuner via /dev/fm).
+PRODUCT_PACKAGES += \
+    QuickCodes \
+    CubeCalculator \
+    CubeWeather \
+    CubeClock \
+    CubeRadio
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
