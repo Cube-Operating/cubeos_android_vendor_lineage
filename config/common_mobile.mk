@@ -33,6 +33,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeDEX
 
+# CubeOS: Cube Health (packages/apps/CubeOSApps/prebuilts/CubeHealth), activity rings, step
+# counting and health logs on the phone, with Health Connect.
+PRODUCT_PACKAGES += \
+    CubeHealth
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
