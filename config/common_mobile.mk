@@ -69,6 +69,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeCamera
 
+# CubeOS: identity & security (prebuilts). Wallet (encrypted offline ID documents), Passwords
+# (vault + AutoFill service) and Contacts Backup (end-to-end-encrypted contacts in the Cube Account).
+PRODUCT_PACKAGES += \
+    CubeWallet \
+    CubePasswords \
+    CubeContactsBackup
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
