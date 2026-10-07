@@ -38,6 +38,12 @@
          screenshot has been saved to work profile. If blank, a default icon will be shown. -->
     <string name="config_sceenshotWorkProfileFilesApp" translatable="false">com.android.documentsui/.files.LauncherActivity</string>
 
+    <!-- CubeOS: Cube Screenshots shows the floating thumbnail and markup editor after every
+         screenshot, so SystemUI saves them without its own preview (frameworks/base
+         TakeScreenshotExecutor, cubeos-contisx-apps). -->
+    <bool name="config_cubeScreenshotPreview">false</bool>
+    <string name="config_screenshotEditor" translatable="false">org.cubeapp.screenshots/.edit.EditorActivity</string>
+
     <!-- Whether or not lockscreen shortcuts can be customized -->
     <bool name="custom_lockscreen_shortcuts_enabled" translatable="false">true</bool>
 </resources>

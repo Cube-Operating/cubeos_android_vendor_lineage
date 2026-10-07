@@ -59,7 +59,8 @@ PRODUCT_PACKAGES += \
 # and Recently Deleted; DocumentsUI stays for the system picker), Battery (health, history, NEPA
 # mode; persistent), Clipboard (encrypted history that never keeps passwords or codes;
 # persistent), PDF Tools (the PDF viewer and editor), Cube Share (offline encrypted transfer),
-# Screen Recorder, and Call Notes (on-device notes of CubeLine calls; no internet).
+# Screen Recorder, Screenshots (the floating thumbnail and markup editor; SystemUI's own preview
+# is off, see overlay/common SystemUI config) and Call Notes (on-device notes of CubeLine calls; no internet).
 PRODUCT_PACKAGES += \
     CubeFiles \
     CubeBattery \
@@ -67,6 +68,7 @@ PRODUCT_PACKAGES += \
     CubePDF \
     CubeShare \
     CubeScreenRecorder \
+    CubeScreenshots \
     CallNotes
 
 # CubeOS: safety and everyday apps (packages/apps/CubeOSApps/prebuilts):
