@@ -1,0 +1,8 @@
+# CubeOS: the landscape "unified" status-bar battery (BatteryLayersDrawable): a horizontal body
+# filling left to right with the level inside, as on an iPhone, beside Cube Island.
+flag_value {
+  package: "com.android.settingslib.flags"
+  name: "new_status_bar_icons"
+  state: ENABLED
+  permission: READ_ONLY
+}
