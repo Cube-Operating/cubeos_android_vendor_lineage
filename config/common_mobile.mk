@@ -44,6 +44,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeWatch
 
+# CubeOS: everyday tools (packages/apps/CubeOSApps/prebuilts), all on the phone, no accounts:
+# Scanner (documents to searchable PDFs with on-device text recognition, signature stamp),
+# Cube Tools (torch, magnifier, measure incl. camera tape, QR scanner), Notes (voice notes
+# transcribed on the phone; no internet) and Cube Recorder (on-device transcription and the
+# speech service Notes uses; replaces LineageOS Recorder).
+PRODUCT_PACKAGES += \
+    CubeScanner \
+    CubeTools \
+    CubeNotes \
+    CubeRecorder
+
 # CubeOS: safety and everyday apps (packages/apps/CubeOSApps/prebuilts):
 # Link Checker (checks every tapped link; the default link handler, see overlay),
 # Up NEPA (power-supply tracker; persistent for instant mains detection),
