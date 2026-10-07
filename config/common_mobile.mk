@@ -55,6 +55,20 @@ PRODUCT_PACKAGES += \
     CubeNotes \
     CubeRecorder
 
+# CubeOS: system essentials (packages/apps/CubeOSApps/prebuilts): Files (file manager with Clean
+# and Recently Deleted; DocumentsUI stays for the system picker), Battery (health, history, NEPA
+# mode; persistent), Clipboard (encrypted history that never keeps passwords or codes;
+# persistent), PDF Tools (the PDF viewer and editor), Cube Share (offline encrypted transfer),
+# Screen Recorder, and Call Notes (on-device notes of CubeLine calls; no internet).
+PRODUCT_PACKAGES += \
+    CubeFiles \
+    CubeBattery \
+    CubeClipboard \
+    CubePDF \
+    CubeShare \
+    CubeScreenRecorder \
+    CallNotes
+
 # CubeOS: safety and everyday apps (packages/apps/CubeOSApps/prebuilts):
 # Link Checker (checks every tapped link; the default link handler, see overlay),
 # Up NEPA (power-supply tracker; persistent for instant mains detection),
