@@ -121,6 +121,12 @@ PRODUCT_PACKAGES += \
     CubeIslandStatusBar \
     CubeStatusIcons
 
+# CubeOS: Cube Recents (packages/apps/CubeOSApps/launcher/overlays/recents), the app switcher's
+# look while Cube Home is the home app (Trebuchet's fallback recents): near-black backdrop,
+# larger cards. Static overlay.
+PRODUCT_PACKAGES += \
+    CubeRecents
+
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
 
