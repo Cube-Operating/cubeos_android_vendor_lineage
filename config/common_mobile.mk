@@ -80,11 +80,13 @@ PRODUCT_PACKAGES += \
 # calls, media, timers, navigation, downloads, charging and notification banners. Privileged and
 # persistent (status-bar panel window); not on AppHub. Its two overlays (packages/apps/CubeOSApps/
 # island/overlays), switched on by the island while it runs: CubeIslandCutout reserves the
-# centred band around the camera, CubeIslandStatusBar hides the status bar's notification icons.
+# centred band around the camera, CubeIslandStatusBar hides the status bar's notification icons,
+# CubeStatusIcons (island/overlays/icons) are the iOS-style Wi-Fi icons.
 PRODUCT_PACKAGES += \
     CubeIsland \
     CubeIslandCutout \
-    CubeIslandStatusBar
+    CubeIslandStatusBar \
+    CubeStatusIcons
 
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
