@@ -38,6 +38,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeHealth
 
+# CubeOS: Cube Watch (packages/apps/CubeOSApps/prebuilts/CubeWatch), the companion for ContiSX /
+# Cube watches over Bluetooth LE (watch/PROTOCOL.md): notifications, calls, heart rate into
+# Health, Shield SOS and live safety status on the wrist. Privileged, platform-signed.
+PRODUCT_PACKAGES += \
+    CubeWatch
+
 # CubeOS: safety and everyday apps (packages/apps/CubeOSApps/prebuilts):
 # Link Checker (checks every tapped link; the default link handler, see overlay),
 # Up NEPA (power-supply tracker; persistent for instant mains detection),
