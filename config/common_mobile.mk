@@ -129,10 +129,14 @@ PRODUCT_PACKAGES += \
 
 # CubeOS: the Naija games (packages/apps/CubeOSApps/gamekit/GAMES.md): Garden City Life, the
 # life sim in a virtual Port Harcourt that keeps the games' shared wallet, and Beer Parlour
-# League (Whot, Ludo, Ayo) played in its venues. In-game money only. Also on AppHub.
+# League (Whot, Ludo, Ayo) played in its venues, Street Kings FC on its pitches, Naija Quiz
+# Night in its stadiums, and City Quest's real-world quests. In-game money only. Also on AppHub.
 PRODUCT_PACKAGES += \
     GardenCityLife \
-    BeerParlourLeague
+    BeerParlourLeague \
+    StreetKingsFC \
+    NaijaQuizNight \
+    CityQuest
 
 # CubeOS: Face Unlock — camera-only, convenience-class (Class 1). See config/face_unlock.mk.
 include vendor/lineage/config/face_unlock.mk
