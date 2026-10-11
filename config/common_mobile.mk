@@ -121,10 +121,14 @@ PRODUCT_PACKAGES += \
     CubeIslandStatusBar \
     CubeStatusIcons
 
-# CubeOS: Cube Recents (packages/apps/CubeOSApps/launcher/overlays/recents), the app switcher's
-# look while Cube Home is the home app (Trebuchet's fallback recents): near-black backdrop,
-# larger cards. Static overlay.
+# CubeOS: Cube Home (packages/apps/CubeOSApps/prebuilts/CubeHome) is the default home app from
+# first boot: home screen, App Library, widgets, lock screen, Control Center and Notification
+# Center. Its HOME filter outranks Trebuchet's, which stays for QuickStep's recents. Pulls in
+# Cube Recents (packages/apps/CubeOSApps/launcher/overlays/recents), the app switcher's look
+# while Cube Home is the home app (Trebuchet's fallback recents): near-black backdrop, larger
+# cards. Static overlay. Media-listener and Do Not Disturb access: overlay/common config.xml.
 PRODUCT_PACKAGES += \
+    CubeHome \
     CubeRecents
 
 # CubeOS: the Naija games (packages/apps/CubeOSApps/gamekit/GAMES.md): Garden City Life, the

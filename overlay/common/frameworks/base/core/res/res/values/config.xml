@@ -192,4 +192,10 @@
     <!-- CubeOS: Link Checker is the link handler (browser role) from first boot: it checks each
          tapped link, then forwards safe ones to Cube Browser. Users can change it in Settings. -->
     <string name="config_defaultBrowser" translatable="false">org.cubeapp.linkcheck</string>
+
+    <!-- CubeOS: Cube Home, the default home app, gets notification-listener access (Control
+         Center's now-playing media) and Do Not Disturb access (its Focus tile) from first boot.
+         Users can turn either off in Settings. -->
+    <string name="config_defaultListenerAccessPackages" translatable="false">org.cubeapp.launcher</string>
+    <string name="config_defaultDndAccessPackages" translatable="false">com.android.camera2:org.cubeapp.launcher</string>
 </resources>
