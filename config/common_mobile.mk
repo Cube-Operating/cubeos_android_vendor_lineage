@@ -268,7 +268,8 @@ PRODUCT_PACKAGES += \
 # the permission prompt as an iOS alert.
 PRODUCT_PACKAGES += \
     CubeMotion \
-    CubePermissionsOverlay
+    CubePermissionsOverlay \
+    CubeKeyguard
 
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;org.cubeapp.motion
+    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;org.cubeapp.motion;org.cubeapp.keyguard
