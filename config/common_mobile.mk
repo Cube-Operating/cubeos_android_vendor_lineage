@@ -262,5 +262,10 @@ PRODUCT_PACKAGES += \
 
 # CubeOS: gesture navigation from first boot (iOS-style home indicator, no 3-button bar). Swipe up
 # goes home (Cube Home), swipe up and hold opens the app switcher (Trebuchet's fallback recents).
+# CubeOS motion (packages/apps/CubeOSApps/overlays/motion): iOS-style open / close motion for
+# every popup — alerts and dialogs, menus / spinners, toasts. Enabled from first boot below.
+PRODUCT_PACKAGES += \
+    CubeMotion
+
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
+    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;org.cubeapp.motion
