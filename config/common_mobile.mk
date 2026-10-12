@@ -131,6 +131,17 @@ PRODUCT_PACKAGES += \
     CubeHome \
     CubeRecents
 
+# CubeOS: the everyday apps (packages/apps/CubeOSApps/prebuilts): Cube Browser, Cube Calendar,
+# Convene (meetings, signed in with the Cube Account), Cube Music, Cube Photos (gallery) and Cube
+# Settings (privileged; AOSP Settings stays for the system's own screens). Also on AppHub.
+PRODUCT_PACKAGES += \
+    CubeBrowser \
+    CubeCalendar \
+    Convene \
+    CubeMusic \
+    CubePhotos \
+    CubeSettings
+
 # CubeOS: the Naija games (packages/apps/CubeOSApps/gamekit/GAMES.md): Garden City Life, the
 # life sim in a virtual Port Harcourt that keeps the games' shared wallet, and Beer Parlour
 # League (Whot, Ludo, Ayo) played in its venues, Street Kings FC on its pitches, Naija Quiz
