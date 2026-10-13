@@ -13,6 +13,9 @@ genrule {
         "bootanimation.tar",
         "desc.txt",
         "gen-bootanimation.sh",
+        // CubeOS: the prebuilt TARGET_BOOTANIMATION, so a regenerated zip is picked up (the copy
+        // command reads it by path, which Soong doesn't track).
+        "cubeos/bootanimation.zip",
     ],
     out: ["bootanimation.zip"],
 
