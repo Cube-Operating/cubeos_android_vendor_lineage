@@ -5,10 +5,11 @@
   ./make-bootanimation.py [--preview]     # writes bootanimation.zip (and preview.png) here
 
 Design (720x1280, 60 fps, pure black, everything centred):
-  * the CubeOS cube mark (isometric cube, faces lit from above, fine light edges, a faint halo) above the
-    "ContiSX" wordmark (Inter Display SemiBold, silver), and "powered by cubeOS" at the foot;
-  * part0 intro (2.0 s, played once): the mark settles in from 92 % and out of soft focus, the
-    wordmark rises in while a light sheen passes across it, then the footer and progress bar appear;
+  * the "ContiSX" wordmark (Inter Display SemiBold, silver) alone at the centre, and at the foot
+    "powered by" over the cubeOS lockup: the cube mark (isometric, faces lit from above, fine light
+    edges) beside the "cubeOS" wordmark, optically centred as one unit;
+  * part0 intro (2.0 s, played once): the wordmark settles in from 96 % and out of soft focus while a
+    light sheen passes across it, then the footer and progress bar appear;
   * part1 loop (2.4 s, until Android has booted): a thin progress bar with a gliding highlight,
     and a gentle sheen across the wordmark once per loop;
   * part2 outro (0.5 s, played once when boot completes): a clean fade to black.
@@ -31,12 +32,11 @@ W, H, FPS = 720, 1280, 60
 SS = 4  # supersampling for the static layers
 
 CX = W // 2
-CUBE_Y = 548          # centre of the cube mark
-CUBE_R = 70           # cube "radius" (centre to hexagon vertex)
-WORD_Y = 690          # wordmark centre line
-BAR_Y = 786           # progress bar centre line
+CUBE_R = 13           # footer cube mark "radius" (centre to hexagon vertex)
+WORD_Y = 620          # wordmark centre line (a touch above centre, where the eye rests)
+BAR_Y = 716           # progress bar centre line
 BAR_W, BAR_H = 132, 4
-FOOT_Y = 1150         # "powered by" line; "cubeOS" below it
+FOOT_Y = 1138         # "powered by" line; the cubeOS lockup below it
 
 
 def font(name, size):
@@ -83,25 +83,17 @@ def cube_layer():
     v = [(c + r * math.cos(math.radians(a)), c + r * math.sin(math.radians(a))) for a in (-90, -30, 30, 90, 150, 210)]
     img = Image.new("RGBA", (s, s), (0, 0, 0, 0))
     top_y, mid_y, bot_y = v[0][1], c, v[3][1]
-    img.alpha_composite(_gradient_face(s, [v[0], v[1], (c, c), v[5]], (150, 150, 158), (96, 96, 104), top_y, mid_y))
-    img.alpha_composite(_gradient_face(s, [v[5], (c, c), v[3], v[4]], (84, 84, 91), (50, 50, 55), v[5][1], bot_y))
-    img.alpha_composite(_gradient_face(s, [v[1], v[2], v[3], (c, c)], (52, 52, 57), (28, 28, 31), v[1][1], bot_y))
+    # Faces lit from above: top brightest, left mid, right in shade (the mark is small, so its
+    # tones sit close to the wordmark's silver to read as one lockup).
+    img.alpha_composite(_gradient_face(s, [v[0], v[1], (c, c), v[5]], (238, 238, 242), (200, 200, 206), top_y, mid_y))
+    img.alpha_composite(_gradient_face(s, [v[5], (c, c), v[3], v[4]], (168, 168, 175), (132, 132, 139), v[5][1], bot_y))
+    img.alpha_composite(_gradient_face(s, [v[1], v[2], v[3], (c, c)], (104, 104, 111), (78, 78, 84), v[1][1], bot_y))
     d = ImageDraw.Draw(img)
-    lw = int(1.5 * SS)
+    lw = max(1, int((1.5 if CUBE_R > 30 else 0.9) * SS))
     for a, b in [(v[i], v[(i + 1) % 6]) for i in range(6)] + [((c, c), v[1]), ((c, c), v[3]), ((c, c), v[5])]:
         d.line([a, b], fill=(255, 255, 255, 105), width=lw)
-    d.line([v[5], (c, c), v[1]], fill=(255, 255, 255, 215), width=int(2.0 * SS), joint="curve")
+    d.line([v[5], (c, c), v[1]], fill=(255, 255, 255, 215), width=int((2.0 if CUBE_R > 30 else 1.1) * SS), joint="curve")
     return img.resize((size, size), Image.LANCZOS)
-
-
-def halo_layer():
-    """A faint soft white halo for behind the cube."""
-    size = int(CUBE_R * 5)
-    img = Image.new("RGBA", (size, size), (255, 255, 255, 0))
-    m = Image.new("L", (size, size), 0)
-    ImageDraw.Draw(m).ellipse([size * 0.3, size * 0.3, size * 0.7, size * 0.7], fill=34)
-    img.putalpha(m.filter(ImageFilter.GaussianBlur(size * 0.09)))
-    return img
 
 
 def text_mask(txt, fnt, tracking=0.0):
@@ -140,13 +132,31 @@ def mono(mask, rgb):
 
 
 CUBE = cube_layer()
-HALO = halo_layer()
 WORD_MASK = text_mask("ContiSX", font("interdisplay_semibold.ttf", 58), tracking=0.01)
 WORD = silver(WORD_MASK)
 WORD_GLOW = Image.new("RGBA", WORD_MASK.size, (255, 255, 255, 0))
 WORD_GLOW.putalpha(WORD_MASK.point(lambda p: int(p * 0.22)).filter(ImageFilter.GaussianBlur(9)))
 FOOT_POWERED = mono(text_mask("powered by", font("inter_medium.ttf", 15), tracking=0.06), (142, 142, 147))
 FOOT_CUBEOS = mono(text_mask("cubeOS", font("interdisplay_semibold.ttf", 23), tracking=0.01), (236, 236, 240))
+
+
+def lockup():
+    """The cube mark beside the cubeOS wordmark: the mark matches the cap height plus a little
+    (as Apple sizes a glyph next to a wordmark), sits on the text's optical centre, with a gap of
+    about a fifth of the mark's width."""
+    cube = CUBE.crop(CUBE.getbbox())
+    h = int(FOOT_CUBEOS.height * 1.22)
+    cube = cube.resize((max(1, round(cube.width * h / cube.height)), h), Image.LANCZOS)
+    gap = round(cube.width * 0.22)
+    w = cube.width + gap + FOOT_CUBEOS.width
+    hh = max(cube.height, FOOT_CUBEOS.height)
+    img = Image.new("RGBA", (w, hh), (0, 0, 0, 0))
+    img.alpha_composite(cube, (0, (hh - cube.height) // 2))
+    img.alpha_composite(FOOT_CUBEOS, (cube.width + gap, (hh - FOOT_CUBEOS.height) // 2))
+    return img
+
+
+LOCKUP = lockup()
 
 
 def paste_alpha(canvas, layer, cx, cy, alpha=1.0, scale=1.0, blur=0.0):
@@ -200,18 +210,16 @@ def progress_bar(canvas, alpha, pos):
     canvas.alpha_composite(layer, (CX - BAR_W // 2, BAR_Y - BAR_H // 2))
 
 
-def frame(cube_a=1.0, cube_s=1.0, cube_blur=0.0, word_a=1.0, word_dy=0.0, sheen_pos=None, sheen_k=0.0,
+def frame(word_s=1.0, word_blur=0.0, word_a=1.0, word_dy=0.0, sheen_pos=None, sheen_k=0.0,
           foot_a=1.0, bar_a=1.0, bar_pos=0.0, all_a=1.0, all_s=1.0):
     canvas = Image.new("RGBA", (W, H), (0, 0, 0, 255))
-    paste_alpha(canvas, HALO, CX, CUBE_Y, cube_a * all_a, cube_s * all_s)
-    paste_alpha(canvas, CUBE, CX, CUBE_Y, cube_a * all_a, cube_s * all_s, cube_blur)
-    paste_alpha(canvas, WORD_GLOW, CX, WORD_Y + word_dy, word_a * all_a, all_s)
-    paste_alpha(canvas, WORD, CX, WORD_Y + word_dy, word_a * all_a, all_s)
+    paste_alpha(canvas, WORD_GLOW, CX, WORD_Y + word_dy, word_a * all_a, word_s * all_s, word_blur)
+    paste_alpha(canvas, WORD, CX, WORD_Y + word_dy, word_a * all_a, word_s * all_s, word_blur)
     if sheen_pos is not None and sheen_k > 0:
         paste_alpha(canvas, sheen(sheen_pos, sheen_k), CX, WORD_Y + word_dy, word_a * all_a, all_s)
     progress_bar(canvas, bar_a * all_a, bar_pos)
     paste_alpha(canvas, FOOT_POWERED, CX, FOOT_Y, foot_a * all_a * 0.9)
-    paste_alpha(canvas, FOOT_CUBEOS, CX, FOOT_Y + 30, foot_a * all_a)
+    paste_alpha(canvas, LOCKUP, CX, FOOT_Y + 32, foot_a * all_a)
     return canvas.convert("RGB")
 
 
@@ -224,12 +232,10 @@ def jpeg(img):
 def intro():
     for i in range(int(2.0 * FPS)):
         t = i / FPS
-        c = ease_out(span(t, 0.25, 1.05))
-        w = ease_out(span(t, 0.75, 1.40))
-        f = ease_out(span(t, 1.35, 1.95))
-        yield frame(cube_a=c, cube_s=0.92 + 0.08 * c, cube_blur=7 * (1 - c),
-                    word_a=w, word_dy=10 * (1 - w),
-                    sheen_pos=ease_in_out(span(t, 1.10, 1.85)), sheen_k=0.55 if 1.10 < t < 1.85 else 0,
+        w = ease_out(span(t, 0.30, 1.15))
+        f = ease_out(span(t, 1.30, 1.90))
+        yield frame(word_a=w, word_s=0.96 + 0.04 * w, word_blur=6 * (1 - w), word_dy=6 * (1 - w),
+                    sheen_pos=ease_in_out(span(t, 0.95, 1.75)), sheen_k=0.55 if 0.95 < t < 1.75 else 0,
                     foot_a=f, bar_a=f, bar_pos=0.0)
 
 
