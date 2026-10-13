@@ -5,14 +5,14 @@
   ./make-bootanimation.py [--preview]     # writes bootanimation.zip (and preview.png) here
 
 Design (720x1280, 60 fps, pure black, everything centred):
-  * the "ContiSX" wordmark (Inter Display SemiBold, silver) alone at the centre, and at the foot
+  * the "ContiSX" wordmark (Inter Bold, large, tightly tracked, silver) alone at the centre, and at the foot
     "powered by" over the cubeOS lockup: the cube mark (isometric, faces lit from above, fine light
     edges) beside the "cubeOS" wordmark, optically centred as one unit;
   * part0 intro (2.0 s, played once): the wordmark settles in from 96 % and out of soft focus while a
     light sheen passes across it, then the footer and progress bar appear;
-  * part1 loop (2.4 s, until Android has booted): a thin progress bar with a gliding highlight,
-    and a gentle sheen across the wordmark once per loop;
-  * part2 outro (0.5 s, played once when boot completes): a clean fade to black.
+  * part1 loop (1.6 s, until Android has booted): only the hairline progress bar's highlight glides;
+  * part2 outro (0.75 s, played once when boot completes): the hand-off to the lock screen — bar
+    and footer fade, then the wordmark zooms through (grows 10 %, softens, dissolves) into black.
 Fonts: Inter Display / Inter from cubeos_apps (cubeui/src/main/res/font), found via FONT_DIR
 (defaults to packages/apps/CubeOSApps in the tree). Frames are JPEG, stored uncompressed.
 vendor/lineage/config/BoardConfigLineage.mk points TARGET_BOOTANIMATION at the zip.
@@ -33,9 +33,9 @@ SS = 4  # supersampling for the static layers
 
 CX = W // 2
 CUBE_R = 13           # footer cube mark "radius" (centre to hexagon vertex)
-WORD_Y = 620          # wordmark centre line (a touch above centre, where the eye rests)
-BAR_Y = 716           # progress bar centre line
-BAR_W, BAR_H = 132, 4
+WORD_Y = 616          # wordmark centre line (a touch above centre, where the eye rests)
+BAR_Y = 732           # progress bar centre line
+BAR_W, BAR_H = 148, 4
 FOOT_Y = 1138         # "powered by" line; the cubeOS lockup below it
 
 
@@ -132,12 +132,13 @@ def mono(mask, rgb):
 
 
 CUBE = cube_layer()
-WORD_MASK = text_mask("ContiSX", font("interdisplay_semibold.ttf", 58), tracking=0.01)
+# Bold, large and tightly tracked, as a display face is set at this size (SF Pro Display Bold).
+WORD_MASK = text_mask("ContiSX", font("inter_bold.ttf", 86), tracking=-0.028)
 WORD = silver(WORD_MASK)
 WORD_GLOW = Image.new("RGBA", WORD_MASK.size, (255, 255, 255, 0))
-WORD_GLOW.putalpha(WORD_MASK.point(lambda p: int(p * 0.22)).filter(ImageFilter.GaussianBlur(9)))
-FOOT_POWERED = mono(text_mask("powered by", font("inter_medium.ttf", 15), tracking=0.06), (142, 142, 147))
-FOOT_CUBEOS = mono(text_mask("cubeOS", font("interdisplay_semibold.ttf", 23), tracking=0.01), (236, 236, 240))
+WORD_GLOW.putalpha(WORD_MASK.point(lambda p: int(p * 0.20)).filter(ImageFilter.GaussianBlur(12)))
+FOOT_POWERED = mono(text_mask("powered by", font("inter_medium.ttf", 16), tracking=0.05), (142, 142, 147))
+FOOT_CUBEOS = mono(text_mask("cubeOS", font("inter_bold.ttf", 28), tracking=-0.015), (240, 240, 244))
 
 
 def lockup():
@@ -211,15 +212,15 @@ def progress_bar(canvas, alpha, pos):
 
 
 def frame(word_s=1.0, word_blur=0.0, word_a=1.0, word_dy=0.0, sheen_pos=None, sheen_k=0.0,
-          foot_a=1.0, bar_a=1.0, bar_pos=0.0, all_a=1.0, all_s=1.0):
+          foot_a=1.0, bar_a=1.0, bar_pos=0.0, all_a=1.0, all_s=1.0, all_blur=0.0):
     canvas = Image.new("RGBA", (W, H), (0, 0, 0, 255))
-    paste_alpha(canvas, WORD_GLOW, CX, WORD_Y + word_dy, word_a * all_a, word_s * all_s, word_blur)
-    paste_alpha(canvas, WORD, CX, WORD_Y + word_dy, word_a * all_a, word_s * all_s, word_blur)
+    paste_alpha(canvas, WORD_GLOW, CX, WORD_Y + word_dy, word_a * all_a, word_s * all_s, word_blur + all_blur)
+    paste_alpha(canvas, WORD, CX, WORD_Y + word_dy, word_a * all_a, word_s * all_s, word_blur + all_blur)
     if sheen_pos is not None and sheen_k > 0:
         paste_alpha(canvas, sheen(sheen_pos, sheen_k), CX, WORD_Y + word_dy, word_a * all_a, all_s)
     progress_bar(canvas, bar_a * all_a, bar_pos)
     paste_alpha(canvas, FOOT_POWERED, CX, FOOT_Y, foot_a * all_a * 0.9)
-    paste_alpha(canvas, LOCKUP, CX, FOOT_Y + 32, foot_a * all_a)
+    paste_alpha(canvas, LOCKUP, CX, FOOT_Y + 36, foot_a * all_a)
     return canvas.convert("RGB")
 
 
@@ -240,24 +241,30 @@ def intro():
 
 
 def loop():
-    n = int(2.4 * FPS)
+    # While Android boots: only the hairline bar moves (calm, like iOS); short, so the hand-off to
+    # the lock screen follows boot completion closely.
+    n = int(1.6 * FPS)
     for i in range(n):
-        t = i / n
-        sp = span(t, 0.20, 0.62)
-        yield frame(sheen_pos=ease_in_out(sp), sheen_k=0.32 if 0 < sp < 1 else 0, bar_pos=ease_in_out(t))
+        yield frame(bar_pos=ease_in_out(i / n))
 
 
 def outro():
-    n = int(0.5 * FPS)
+    # The hand-off: an iOS-style zoom-through — the bar and footer fade first, then the wordmark
+    # grows slightly, softens and dissolves into black, so the lock screen arrives out of darkness.
+    n = int(0.75 * FPS)
     for i in range(n):
-        k = 1 - ease_out((i + 1) / n)
-        yield frame(all_a=k, all_s=0.985 + 0.015 * k, bar_pos=0.0)
+        t = (i + 1) / n
+        lead = ease_out(span(t, 0.0, 0.45))           # bar + footer
+        k = span(t, 0.10, 1.0)
+        z = k * k * (3 - 2 * k)                        # smoothstep for the wordmark
+        yield frame(foot_a=1 - lead, bar_a=1 - lead, bar_pos=0.0,
+                    word_a=1 - z, word_s=1 + 0.10 * z, all_blur=10 * z)
 
 
 def main():
     parts = {"part0": list(intro()), "part1": list(loop()), "part2": list(outro())}
     if "--preview" in sys.argv:
-        picks = [parts["part0"][30], parts["part0"][80], parts["part0"][105], parts["part1"][40], parts["part2"][12]]
+        picks = [parts["part0"][40], parts["part0"][100], parts["part1"][40], parts["part2"][18], parts["part2"][32]]
         sheet = Image.new("RGB", (W // 2 * len(picks), H // 2))
         for k, im in enumerate(picks):
             sheet.paste(im.resize((W // 2, H // 2), Image.LANCZOS), (k * W // 2, 0))
