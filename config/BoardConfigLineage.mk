@@ -1,3 +1,7 @@
+# CubeOS boot animation: the ContiSX / "powered by cubeOS" video as a prebuilt bootanimation.zip
+# (bootanimation/cubeos, regenerate with make-bootanimation.py), instead of the generated logo.
+TARGET_BOOTANIMATION ?= vendor/lineage/bootanimation/cubeos/bootanimation.zip
+
 # SPDX-FileCopyrightText: 2017-2024 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
