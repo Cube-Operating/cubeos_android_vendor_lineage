@@ -21,13 +21,13 @@ PRODUCT_PACKAGES += \
     LatinIME
 
 # CubeOS: AppHub, the CubeOS app store (packages/apps/AppHub). CubeOS ships no Play Store.
-# Cube Account (packages/apps/CubeAccount): the system-wide Cubemail account, the way the
-# Google account works on other Android phones. AppHub and Settings sign in through it.
-# Cubemail (packages/apps/Cubemail): the mail app, signed in with the Cube Account.
+# Cubeline account (packages/apps/CubeAccount): the phone's account (AccountManager type
+# org.cubeapp.cubeline), the way the Google account works on other Android phones. Setup
+# requires it; AppHub, Settings and every Cube app sign in through it. Created in Cube App
+# (cubeline.mk).
 PRODUCT_PACKAGES += \
     AppHub \
-    CubeAccount \
-    Cubemail
+    CubeAccount
 
 # CubeOS: CubeDEX (packages/apps/CubeDEX), the Cube decentralised exchange.
 PRODUCT_PACKAGES += \

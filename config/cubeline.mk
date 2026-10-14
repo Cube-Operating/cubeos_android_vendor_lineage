@@ -1,24 +1,28 @@
-# CubeLine (packages/apps/CubeOSApps): free messaging and calls between CubeOS phones, and the
-# phone's own Messages and Phone apps built on it.
+# Cubeline: the core of CubeOS. Every phone has a Cubeline account (an on-chain number, ENS on
+# CUBEX): setup requires creating one, and it is the account every Cube app signs in with.
 #
-#   CubeLine      org.cubeapp.cubeline  the persistent service: one connection for the phone,
-#                                       end-to-end encryption, a Telecom ConnectionService
-#   CubeMessages  org.cubeapp.messages  SMS/MMS + CubeLine; replaces AOSP Messaging (messaging)
+#   CubeApp       ng.cube.app           the Cubeline core: holds the phone's Cubeline identity
+#                                       (Session account, private key), runs Cubeline sign-up /
+#                                       log in for the system account, serves the CubeLine API
+#   CubeAccount   org.cubeapp.account   the system Cubeline account (AccountManager type
+#                                       org.cubeapp.cubeline), listed in common_mobile.mk
+#   CubeMessages  org.cubeapp.messages  SMS/MMS + Cubeline chats; replaces AOSP Messaging (messaging)
 #   CubePhone     org.cubeapp.phone     dialer and in-call screen; replaces Dialer
 #
-# Prebuilt privileged system_ext apps (Gradle-built; Compose, LiveKit/WebRTC), presigned with
-# the platform key, like Cube Health: CubeOSApps/prebuilts/{CubeLine,CubeMessages,CubePhone}.
-# Each module pulls in its privapp and default-permissions files (and CubeLine its power-save
-# exemption) through `required`.
+# Prebuilt system_ext apps (Gradle-built): CubeOSApps/prebuilts/{CubeApp,CubeMessages,CubePhone}.
+# Messages and Phone are privileged and presigned with the platform key; Cube App keeps its own
+# key. Each module pulls in its permission files through `required`.
 # The overlay makes Phone the default dialer and Messages the default SMS app.
-# Refresh the APKs with CubeOSApps/tools/update-prebuilts.sh. See CubeOSApps/CUBELINE_OS.md.
+# Refresh with CubeOSApps/tools/update-prebuilts.sh (Messages, Phone) and
+# CubeOSApps/tools/update-cubeapp.sh (Cube App). See CubeOSApps/CUBELINE_OS.md.
+# The old CubeLine service (org.cubeapp.cubeline, CubeChat PINs) is no longer shipped.
 #
 # Set CUBE_LINE := false to build with the stock Dialer and Messaging instead.
 
 ifneq ($(CUBE_LINE),false)
 
 PRODUCT_PACKAGES += \
-    CubeLine \
+    CubeApp \
     CubeMessages \
     CubePhone
 
