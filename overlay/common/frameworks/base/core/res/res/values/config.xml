@@ -198,4 +198,7 @@
          Users can turn either off in Settings. -->
     <string name="config_defaultListenerAccessPackages" translatable="false">org.cubeapp.launcher</string>
     <string name="config_defaultDndAccessPackages" translatable="false">com.android.camera2:org.cubeapp.launcher</string>
+
+    <!-- CubeOS: alerts and pop-ups everywhere share Cube's softer, larger corners. -->
+    <dimen name="config_dialogCornerRadius">34dp</dimen>
 </resources>

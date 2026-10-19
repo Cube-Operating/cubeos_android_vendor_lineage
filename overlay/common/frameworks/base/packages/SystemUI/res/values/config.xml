@@ -23,6 +23,10 @@
         <item>com.android.systemui</item>
         <item>com.android.systemui.plugin.globalactions.wallet</item>
         <item>org.lineageos.settings.device</item>
+        <!-- CubeOS: Cube Home's SystemUI plugins (CubePowerPlugin: the power-off / restart
+             screen; CubeClockPlugin: the lock screen clock). Release builds load only listed
+             packages, so without this the stock power menu showed. -->
+        <item>org.cubeapp.launcher</item>
     </string-array>
 
     <!-- Icons that don't show in a collapsed non-keyguard statusbar -->
