@@ -21,4 +21,9 @@
 <resources>
     <string name="ui_default_package" translatable="false">org.cubeapp.phone</string>
     <string name="dialer_default_class" translatable="false">org.cubeapp.phone.MainActivity</string>
+    <!-- The system dialer's InCallService. Left at AOSP's com.android.incallui.InCallServiceImpl
+         (which Phone doesn't have), Telecom bound no call screen at all whenever its default-dialer
+         check didn't pass: incoming calls never showed or rang, outgoing calls were cancelled.
+         As the system UI, Phone's CallService is bound for every call. -->
+    <string name="incall_default_class" translatable="false">org.cubeapp.phone.incall.CallService</string>
 </resources>
