@@ -29,3 +29,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGE_OVERLAYS += vendor/lineage/overlay/cubeline
 
 endif
+
+# CubeOS's own sounds (packages/apps/CubeOSApps/sounds, made by make-sounds.py): 8 ringtones,
+# 6 notification sounds and 2 alarms, next to the stock set; Cube / Note / Sunrise are the
+# defaults (ro.config.* in telephony.mk and common_mobile.mk).
+CUBE_SOUNDS := packages/apps/CubeOSApps/sounds
+PRODUCT_COPY_FILES += \
+    $(foreach f,$(wildcard $(CUBE_SOUNDS)/ringtones/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/ringtones/$(notdir $(f))) \
+    $(foreach f,$(wildcard $(CUBE_SOUNDS)/notifications/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/$(notdir $(f))) \
+    $(foreach f,$(wildcard $(CUBE_SOUNDS)/alarms/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/alarms/$(notdir $(f)))
+
