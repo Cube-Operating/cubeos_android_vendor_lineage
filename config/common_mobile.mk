@@ -109,6 +109,11 @@ PRODUCT_PACKAGES += \
     CubePasswords \
     CubeContactsBackup
 
+# CubeOS: Cube BD Address (prebuilts/CubeBdAddr), gives phones still on MediaTek's default
+# Bluetooth address their own on boot (system user, through the NVRAM agent).
+PRODUCT_PACKAGES += \
+    CubeBdAddr
+
 # CubeOS: Cube Island (prebuilts/CubeIsland), the live-activity island around the camera cutout:
 # calls, media, timers, navigation, downloads, charging and notification banners. Privileged and
 # persistent (status-bar panel window); not on AppHub. Its two overlays (packages/apps/CubeOSApps/
