@@ -271,8 +271,11 @@ PRODUCT_PACKAGES += \
 # of alerts, dialogs, menus / spinners and toasts, the framework alert layout, toast capsule and
 # menu panel; enabled from first boot below. CubePermissionsOverlay (overlays/permissions, static):
 # the permission prompt as an iOS alert.
+# CubeMarkFramework (overlays/mark, static): the CubeOS cube mark in place of Android's robot (the
+# default app icon, the USB-debugging icon).
 PRODUCT_PACKAGES += \
     CubeMotion \
+    CubeMarkFramework \
     CubePermissionsOverlay \
     CubeKeyguard
 
