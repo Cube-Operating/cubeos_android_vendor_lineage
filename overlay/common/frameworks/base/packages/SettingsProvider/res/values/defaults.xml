@@ -27,9 +27,23 @@
          Override to disable immersive mode confirmation for certain packages. -->
     <string name="def_immersive_mode_confirmations" translatable="false">confirmed</string>
 
-    <!-- This is disabled by default, but turned on in SetupWizard -->
-    <bool name="assisted_gps_enabled">false</bool>
+    <!-- CubeOS: on by default. LineageOS turns it on in its SetupWizard, which CubeOS replaces;
+         left off, GNSS runs standalone and skips PSDS, so fixes are slow and unstable. -->
+    <bool name="assisted_gps_enabled">true</bool>
 
     <!-- CubeOS: apps open in portrait by default; rotation can be turned on in Control Center. -->
     <bool name="def_accelerometer_rotation">false</bool>
+
+    <!-- CubeOS: state and event sounds from CubeOS's own UI set (packages/apps/CubeOSApps/sounds/ui,
+         made by make-sounds.py). Lock falls a fourth, unlock rises a fifth, charging rises. -->
+    <string name="def_lock_sound" translatable="false">/product/media/audio/ui/CubeLock.wav</string>
+    <string name="def_unlock_sound" translatable="false">/product/media/audio/ui/CubeUnlock.wav</string>
+    <string name="def_trusted_sound" translatable="false">/product/media/audio/ui/CubeTrusted.wav</string>
+    <string name="def_charging_started_sound" translatable="false">/product/media/audio/ui/CubeCharging.wav</string>
+    <string name="def_wireless_charging_started_sound" translatable="false">/product/media/audio/ui/CubeCharging.wav</string>
+    <string name="def_low_battery_sound" translatable="false">/product/media/audio/ui/CubeLowBattery.wav</string>
+    <string name="def_desk_dock_sound" translatable="false">/product/media/audio/ui/CubeDock.wav</string>
+    <string name="def_desk_undock_sound" translatable="false">/product/media/audio/ui/CubeUndock.wav</string>
+    <string name="def_car_dock_sound" translatable="false">/product/media/audio/ui/CubeDock.wav</string>
+    <string name="def_car_undock_sound" translatable="false">/product/media/audio/ui/CubeUndock.wav</string>
 </resources>

@@ -37,5 +37,8 @@ CUBE_SOUNDS := packages/apps/CubeOSApps/sounds
 PRODUCT_COPY_FILES += \
     $(foreach f,$(wildcard $(CUBE_SOUNDS)/ringtones/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/ringtones/$(notdir $(f))) \
     $(foreach f,$(wildcard $(CUBE_SOUNDS)/notifications/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/$(notdir $(f))) \
-    $(foreach f,$(wildcard $(CUBE_SOUNDS)/alarms/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/alarms/$(notdir $(f)))
+    $(foreach f,$(wildcard $(CUBE_SOUNDS)/alarms/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/alarms/$(notdir $(f))) \
+    $(foreach f,$(wildcard $(CUBE_SOUNDS)/ui/*.wav),$(f):$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/$(notdir $(f)))
+# The UI sounds (Cube*.wav) are named apart from the stock ones and chosen by overlays:
+# audio_assets.xml (key clicks) and SettingsProvider defaults.xml (lock, charging, dock).
 

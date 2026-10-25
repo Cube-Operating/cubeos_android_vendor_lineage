@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CubeOS: touch sounds from CubeOS's own UI set (packages/apps/CubeOSApps/sounds/ui, made by
+     make-sounds.py), installed in /product/media/audio/ui. Short tuned clicks; the bigger keys
+     sit lower. Each is paired with a Cube Haptics moment. -->
+<audio_assets version="1.0">
+    <asset id="FX_KEY_CLICK" file="CubeTick.wav"/>
+    <asset id="FX_FOCUS_NAVIGATION_UP" file="CubeTick.wav"/>
+    <asset id="FX_FOCUS_NAVIGATION_DOWN" file="CubeTick.wav"/>
+    <asset id="FX_FOCUS_NAVIGATION_LEFT" file="CubeTick.wav"/>
+    <asset id="FX_FOCUS_NAVIGATION_RIGHT" file="CubeTick.wav"/>
+    <asset id="FX_KEYPRESS_STANDARD" file="CubeKey.wav"/>
+    <asset id="FX_KEYPRESS_SPACEBAR" file="CubeKeySpace.wav"/>
+    <asset id="FX_KEYPRESS_DELETE" file="CubeKeyDelete.wav"/>
+    <asset id="FX_KEYPRESS_RETURN" file="CubeKeyReturn.wav"/>
+    <asset id="FX_KEYPRESS_INVALID" file="CubeKeyInvalid.wav"/>
+    <asset id="FX_BACK" file="CubeTick.wav"/>
+</audio_assets>
