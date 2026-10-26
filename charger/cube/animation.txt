@@ -1,0 +1,49 @@
+# CubeOS power-off charging (vendor/lineage/charger/cube/generate.py).
+# animation: num_cycles, first_frame_repeats, animation_file
+animation: 6 1 charger/battery_scale
+# percent_display: x, y (top of the text), r, g, b, a, font
+percent_display: c 604 255 255 255 255 charger/percent_font
+fail: charger/battery_fail
+# frame: disp_time min_level max_level
+frame: 60 0 100
+frame: 1600 0 4
+frame: 60 5 100
+frame: 1600 5 9
+frame: 60 10 100
+frame: 1600 10 14
+frame: 60 15 100
+frame: 1600 15 19
+frame: 60 20 100
+frame: 1600 20 24
+frame: 60 25 100
+frame: 1600 25 29
+frame: 60 30 100
+frame: 1600 30 34
+frame: 60 35 100
+frame: 1600 35 39
+frame: 60 40 100
+frame: 1600 40 44
+frame: 60 45 100
+frame: 1600 45 49
+frame: 60 50 100
+frame: 1600 50 54
+frame: 60 55 100
+frame: 1600 55 59
+frame: 60 60 100
+frame: 1600 60 64
+frame: 60 65 100
+frame: 1600 65 69
+frame: 60 70 100
+frame: 1600 70 74
+frame: 60 75 100
+frame: 1600 75 79
+frame: 60 80 100
+frame: 1600 80 84
+frame: 60 85 100
+frame: 1600 85 89
+frame: 60 90 100
+frame: 1600 90 94
+frame: 60 95 100
+frame: 1600 95 99
+frame: 60 100 100
+frame: 1600 100 100

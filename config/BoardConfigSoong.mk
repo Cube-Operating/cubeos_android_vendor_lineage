@@ -47,6 +47,10 @@ else ifneq (,$(filter mdpi hdpi xhdpi xxhdpi xxxhdpi,$(PRODUCT_AAPT_PREF_CONFIG)
 # If PRODUCT_AAPT_PREF_CONFIG includes a dpi bucket, then use that value.
 lineage_charger_density := $(PRODUCT_AAPT_PREF_CONFIG)
 endif
+# CubeOS: a device can pick a named art set instead (TARGET_CHARGER_ART := cube, charger/cube/).
+ifneq (,$(TARGET_CHARGER_ART))
+lineage_charger_density := $(TARGET_CHARGER_ART)
+endif
 $(call soong_config_set,lineage_charger,density,$(lineage_charger_density))
 
 # Libui
