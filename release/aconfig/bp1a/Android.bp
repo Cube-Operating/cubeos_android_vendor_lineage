@@ -18,5 +18,6 @@ aconfig_value_set {
     values: [
         "aconfig-values-bp1a-android.hardware.biometrics-all",
         "aconfig-values-bp1a-com.android.window.flags-all",
+        "aconfig-values-bp1a-com.android.settingslib.flags-all",
     ],
 }

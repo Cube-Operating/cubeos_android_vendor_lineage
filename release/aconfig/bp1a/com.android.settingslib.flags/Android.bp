@@ -1,0 +1,9 @@
+// CubeOS: enable the Android 15 "new status bar icons" — a horizontal battery with the
+// percentage inside, like iOS. See packages/SettingsLib/aconfig/settingslib.aconfig.
+aconfig_values {
+    name: "aconfig-values-bp1a-com.android.settingslib.flags-all",
+    package: "com.android.settingslib.flags",
+    srcs: [
+        "*_flag_values.textproto",
+    ],
+}
