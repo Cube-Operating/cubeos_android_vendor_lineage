@@ -137,12 +137,12 @@ PRODUCT_PACKAGES += \
     CubeRecents
 
 # CubeOS: the everyday apps (packages/apps/CubeOSApps/prebuilts): Cube Browser, Cube Calendar,
-# Convene (meetings, signed in with the Cube Account), Cube Music, Cube Photos (gallery) and Cube
-# Settings (privileged; AOSP Settings stays for the system's own screens). Also on AppHub.
+# Cube Music, Cube Photos (gallery) and Cube Settings (privileged; AOSP Settings stays for the
+# system's own screens). Also on AppHub. Convene is no longer part of the system (owner,
+# 2026-10-27); its prebuilt stays in CubeOSApps.
 PRODUCT_PACKAGES += \
     CubeBrowser \
     CubeCalendar \
-    Convene \
     CubeMusic \
     CubePhotos \
     CubeSettings
