@@ -204,4 +204,12 @@
 
     <!-- CubeOS: alerts and pop-ups everywhere share Cube's softer, larger corners. -->
     <dimen name="config_dialogCornerRadius">34dp</dimen>
+    <!-- CubeOS: the share sheet is Cube Share's (org.cubeapp.share, platform-signed), not
+         IntentResolver's; it also answers ACTION_CHOOSER at a higher priority. -->
+    <string name="config_chooserActivity" translatable="false">org.cubeapp.share/.sheet.ShareSheetActivity</string>
+
+    <!-- CubeOS: "Open with" (several apps can open something) is Cube Share's sheet, not the
+         framework's Material ResolverActivity. -->
+    <string name="config_customResolverActivity" translatable="false">org.cubeapp.share/.sheet.OpenWithActivity</string>
+
 </resources>

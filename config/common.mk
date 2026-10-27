@@ -128,9 +128,7 @@ PRODUCT_PACKAGES += \
 
 # Lineage packages
 ifeq ($(PRODUCT_IS_ATV),)
-PRODUCT_PACKAGES += \
-    ExactCalculator \
-    Jelly
+# CubeOS: Calculator and Browser replace ExactCalculator and Jelly (stock-UI audit 2026-10-27).
 endif
 
 ifeq ($(PRODUCT_IS_AUTOMOTIVE),)

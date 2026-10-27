@@ -8,18 +8,14 @@ $(call inherit-product-if-exists, external/google-fonts/lato/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/rubik/fonts.mk)
 
 # Apps
+# CubeOS: PDF, Calendar and Recorder replace Camelot, Etar and Recorder (stock-UI audit
+# 2026-10-27). Twelve stays until CubeOS Music opens audio files (VIEW audio/*).
 PRODUCT_PACKAGES += \
-    Camelot \
-    Etar \
     Profiles \
-    Recorder \
     Seedvault \
     Twelve
 
-ifneq ($(PRODUCT_NO_CAMERA),true)
-PRODUCT_PACKAGES += \
-    Aperture
-endif
+# CubeOS: Camera (org.cubeapp.camera) replaces Aperture (stock-UI audit 2026-10-27).
 
 ifneq ($(TARGET_EXCLUDES_AUDIOFX),true)
 PRODUCT_PACKAGES += \

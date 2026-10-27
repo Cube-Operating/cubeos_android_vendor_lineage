@@ -17,8 +17,8 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     AvatarPicker \
     Backgrounds \
-    Glimpse \
     LatinIME
+# CubeOS: Photos replaces Glimpse (stock-UI audit 2026-10-27).
 
 # CubeOS: AppHub, the CubeOS app store (packages/apps/AppHub). CubeOS ships no Play Store.
 # Cubeline account (packages/apps/CubeAccount): the phone's account (AccountManager type
