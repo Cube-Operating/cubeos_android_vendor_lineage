@@ -38,6 +38,11 @@
          made by make-sounds.py). Unlock rises a fifth, charging rises. Locking from the power button
          is felt, not heard (a tick, see KeyguardViewMediator.lockFeedback), so it has no sound. -->
     <string name="def_lock_sound" translatable="false"></string>
+
+    <!-- CubeOS: no click on every tap (opening a screen, typing, buttons), as on iOS; taps are
+         felt instead (haptic feedback stays on). -->
+    <bool name="def_sound_effects_enabled">false</bool>
+    <bool name="def_haptic_feedback">true</bool>
     <string name="def_unlock_sound" translatable="false">/product/media/audio/ui/CubeUnlock.wav</string>
     <string name="def_trusted_sound" translatable="false">/product/media/audio/ui/CubeTrusted.wav</string>
     <string name="def_charging_started_sound" translatable="false">/product/media/audio/ui/CubeCharging.wav</string>
