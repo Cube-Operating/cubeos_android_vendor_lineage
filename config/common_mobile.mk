@@ -102,12 +102,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CubeCamera
 
-# CubeOS: identity & security (prebuilts). Wallet (encrypted offline ID documents), Passwords
-# (vault + AutoFill service) and Contacts Backup (end-to-end-encrypted contacts in the Cube Account).
+# CubeOS: identity & security (prebuilts). Wallet (ID documents, and the Cubeline keychain +
+# Wallet Pay), Passwords (vault + AutoFill service), Contacts Backup (end-to-end-encrypted
+# contacts) and Cube Cloud (end-to-end-encrypted iCloud: Drive, Photos, Backup, sync; R2).
 PRODUCT_PACKAGES += \
     CubeWallet \
     CubePasswords \
-    CubeContactsBackup
+    CubeContactsBackup \
+    CubeCloud
 
 # CubeOS: Cube BD Address (prebuilts/CubeBdAddr), gives phones still on MediaTek's default
 # Bluetooth address their own on boot (system user, through the NVRAM agent).
