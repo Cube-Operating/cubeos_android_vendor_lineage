@@ -149,7 +149,9 @@
              1 - MODE_NIGHT_NO
              2 - MODE_NIGHT_YES
     -->
-    <integer name="config_defaultNightMode">2</integer>
+    <!-- CubeOS: new phones start in Light, as iPhone does (owner, 2026-10-28); Setup offers
+         Light, Dark and Automatic. -->
+    <integer name="config_defaultNightMode">1</integer>
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware. -->
