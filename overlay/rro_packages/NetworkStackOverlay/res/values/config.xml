@@ -19,4 +19,13 @@
     <!-- Configuration for including DHCP client hostname option -->
     <bool name="config_dhcp_client_hostname">true</bool>
 
+    <!-- CubeOS: the internet check asks CubeOS's own server, not Google (owner, 2026-10-28).
+         cubeapp.org answers /generate_204 with an empty 204 and keeps no log of it
+         (nginx snippets/cubeos-connectivity.conf on the CubeOS server). -->
+    <string name="config_captive_portal_http_url" translatable="false">http://cubeapp.org/generate_204</string>
+    <string name="config_captive_portal_https_url" translatable="false">https://cubeapp.org/generate_204</string>
+    <string-array name="config_captive_portal_fallback_urls" translatable="false">
+        <item>http://www.cubeapp.org/generate_204</item>
+    </string-array>
+
 </resources>
