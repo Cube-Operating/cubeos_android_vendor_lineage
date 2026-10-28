@@ -8,12 +8,11 @@ $(call inherit-product-if-exists, external/google-fonts/lato/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/rubik/fonts.mk)
 
 # Apps
-# CubeOS: PDF, Calendar and Recorder replace Camelot, Etar and Recorder (stock-UI audit
-# 2026-10-27). Twelve stays until CubeOS Music opens audio files (VIEW audio/*).
+# CubeOS: PDF, Calendar, Recorder and Music replace Camelot, Etar, Recorder and Twelve
+# (stock-UI audit 2026-10-27/28; Music opens audio files since 2026-10-28).
 PRODUCT_PACKAGES += \
     Profiles \
-    Seedvault \
-    Twelve
+    Seedvault
 
 # CubeOS: Camera (org.cubeapp.camera) replaces Aperture (stock-UI audit 2026-10-27).
 
