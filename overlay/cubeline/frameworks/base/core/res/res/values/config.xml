@@ -21,4 +21,7 @@
 <resources>
     <string name="config_defaultDialer" translatable="false">org.cubeapp.phone</string>
     <string name="config_defaultSms" translatable="false">org.cubeapp.messages</string>
+    <!-- A Cubeline dialed in Phone (keypad, Recents, Contacts) is a CubeLine call, not a SIM call:
+         CubeLine's CallRedirectionService holds the call redirection role from first boot. -->
+    <string name="config_defaultCallRedirection" translatable="false">ng.cube.app</string>
 </resources>
