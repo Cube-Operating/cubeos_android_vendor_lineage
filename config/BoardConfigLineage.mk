@@ -1,5 +1,11 @@
-# CubeOS boot animation: the ContiSX / "powered by cubeOS" video as a prebuilt bootanimation.zip
-# (bootanimation/cubeos, regenerate with make-bootanimation.py), instead of the generated logo.
+# CubeOS boot animation, a prebuilt bootanimation.zip (bootanimation/cubeos) per line, instead of
+# the generated logo:
+#   CubeOS 1.x (ContiSX phones): ContiSX / "powered by cubeOS" (make-bootanimation.py)
+#   CubeOS 2.x (Cube Phones): the Cube mark's three plates, after Runyee's signed Cube logo
+#                             (make-bootanimation-cube.py)
+ifeq ($(CUBEOS_VERSION_MAJOR),2)
+TARGET_BOOTANIMATION ?= vendor/lineage/bootanimation/cubeos/bootanimation-cube.zip
+endif
 TARGET_BOOTANIMATION ?= vendor/lineage/bootanimation/cubeos/bootanimation.zip
 
 # SPDX-FileCopyrightText: 2017-2024 The LineageOS Project
