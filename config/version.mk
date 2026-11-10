@@ -47,8 +47,8 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # CubeOS version
 # CubeOS numbers its own releases. The LineageOS/Android base it is built on
 # is recorded in ro.cube.base and shown only in legal notices.
-CUBEOS_VERSION_MAJOR := 1
-CUBEOS_VERSION_MINOR := 0
+CUBEOS_VERSION_MAJOR := 2
+CUBEOS_VERSION_MINOR := 8
 
 # Internal version, e.g. 1.0-20261001-UNOFFICIAL-sdk_phone_x86_64
 CUBEOS_VERSION := $(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR)-$(LINEAGE_VERSION_SUFFIX)
