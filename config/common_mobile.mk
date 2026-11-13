@@ -138,6 +138,12 @@ PRODUCT_PACKAGES += \
     CubeHome \
     CubeRecents
 
+# CubeOS 2.x is voice first: VoiceOS (packages/apps/CubeOSApps/prebuilts/CubeVoice), the Voice app
+# and its on-device speech models in /system_ext/etc/voiceos. The Camera button is its voice
+# button and its icon leads page one while Voice Mode (Settings.Secure cube_voice_mode) is on,
+# the default. Fetch the models before building: CubeOSApps/voice/tools/fetch-deps.sh.
+include packages/apps/CubeOSApps/prebuilts/CubeVoice/voiceos.mk
+
 # CubeOS: the everyday apps (packages/apps/CubeOSApps/prebuilts): Cube Browser, Cube Calendar,
 # Cube Music, Cube Photos (gallery) and Cube Settings (privileged; AOSP Settings stays for the
 # system's own screens). Also on AppHub. Convene is no longer part of the system (owner,
