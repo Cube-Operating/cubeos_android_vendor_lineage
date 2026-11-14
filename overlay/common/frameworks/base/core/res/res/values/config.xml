@@ -201,7 +201,12 @@
     <!-- CubeOS: Cube Home, the default home app, gets notification-listener access (Control
          Center's now-playing media) and Do Not Disturb access (its Focus tile) from first boot.
          Users can turn either off in Settings. -->
-    <string name="config_defaultListenerAccessPackages" translatable="false">org.cubeapp.launcher</string>
+    <string name="config_defaultListenerAccessPackages" translatable="false">org.cubeapp.launcher:org.cubeapp.voice</string>
+
+    <!-- CubeOS 2.x is voice first: VoiceOS (org.cubeapp.voice) is the phone's assistant and voice
+         interaction service from first boot - the always-on "Cube" wake in the hotword sandbox,
+         the Assist gesture and the on-device speech recogniser. -->
+    <string name="config_defaultAssistant" translatable="false">org.cubeapp.voice</string>
     <string name="config_defaultDndAccessPackages" translatable="false">com.android.camera2:org.cubeapp.launcher</string>
 
     <!-- CubeOS: alerts and pop-ups everywhere share Cube's softer, larger corners. -->
