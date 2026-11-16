@@ -48,17 +48,21 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # CubeOS numbers its own releases. The LineageOS/Android base it is built on
 # is recorded in ro.cube.base and shown only in legal notices.
 CUBEOS_VERSION_MAJOR := 1
-CUBEOS_VERSION_MINOR := 0
+CUBEOS_VERSION_MINOR := 7
+# CubeOS 1.7.1 (owner, 2026-11-16): the ContiSX line after 1.0. Same major, so these phones
+# stay on the 1.x update channel and 1.0 phones accept it (Cube Update compares major.minor).
+CUBEOS_VERSION_PATCH := 1
+CUBEOS_VERSION_NUMBER := $(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR).$(CUBEOS_VERSION_PATCH)
 
-# Internal version, e.g. 1.0-20261001-UNOFFICIAL-sdk_phone_x86_64
-CUBEOS_VERSION := $(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR)-$(LINEAGE_VERSION_SUFFIX)
+# Internal version, e.g. 1.7.1-20261116-UNOFFICIAL-ygf_f35
+CUBEOS_VERSION := $(CUBEOS_VERSION_NUMBER)-$(LINEAGE_VERSION_SUFFIX)
 
 # Display version, as shown in Settings > About phone
-CUBEOS_DISPLAY_VERSION := $(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR)-$(LINEAGE_VERSION_SUFFIX)
+CUBEOS_DISPLAY_VERSION := $(CUBEOS_VERSION_NUMBER)-$(LINEAGE_VERSION_SUFFIX)
 
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.cube.version=$(CUBEOS_VERSION) \
     ro.cube.display.version=$(CUBEOS_DISPLAY_VERSION) \
-    ro.cube.build.version=$(CUBEOS_VERSION_MAJOR).$(CUBEOS_VERSION_MINOR) \
+    ro.cube.build.version=$(CUBEOS_VERSION_NUMBER) \
     ro.cube.releasetype=$(LINEAGE_BUILDTYPE) \
     ro.cube.base=LineageOS-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
