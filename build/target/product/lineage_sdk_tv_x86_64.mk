@@ -21,6 +21,10 @@ TARGET_NO_KERNEL_OVERRIDE := true
 # Enable mainline checking
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 
+# CubeOS: the credentials feature file lands in /system on this tree (same as the car GSIs).
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/etc/permissions/android.software.credentials.xml
+
 # Overrides
 PRODUCT_NAME := lineage_sdk_tv_x86_64
 PRODUCT_MODEL := LineageOS Android TV SDK built for x86_64

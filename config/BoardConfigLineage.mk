@@ -3,6 +3,11 @@
 #   CubeOS 1.x (ContiSX phones): ContiSX / "powered by cubeOS" (make-bootanimation.py)
 #   CubeOS 2.x (Cube Phones): the Cube mark's three plates, after Runyee's signed Cube logo
 #                             (make-bootanimation-cube.py)
+#   Cube SmartTV (lineage_gsi_tv_arm on the CVTE TV): Cube mark + "Cube SmartTV" + progress bar,
+#                             1920x1080 with trimmed strips (cubeos-tv/make-tv-boot.py)
+ifeq ($(TARGET_PRODUCT),lineage_gsi_tv_arm)
+TARGET_BOOTANIMATION ?= vendor/lineage/bootanimation/cubeos-tv/bootanimation.zip
+endif
 ifeq ($(CUBEOS_VERSION_MAJOR),2)
 TARGET_BOOTANIMATION ?= vendor/lineage/bootanimation/cubeos/bootanimation-cube.zip
 endif

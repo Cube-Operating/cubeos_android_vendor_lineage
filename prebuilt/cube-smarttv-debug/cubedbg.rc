@@ -1,0 +1,10 @@
+# Cube SmartTV DEBUG ONLY (remove before any release): boot logger, see cubedbg.sh.
+service cubedbg /system/bin/sh /system/bin/cubedbg.sh
+    user root
+    group root log system
+    seclabel u:r:su:s0
+    oneshot
+    disabled
+
+on early-init
+    start cubedbg
