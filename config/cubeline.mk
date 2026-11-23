@@ -9,7 +9,9 @@
 #   CubeMessages  org.cubeapp.messages  SMS/MMS + Cubeline chats; replaces AOSP Messaging (messaging)
 #   CubePhone     org.cubeapp.phone     dialer and in-call screen; replaces Dialer
 #
-# Prebuilt system_ext apps (Gradle-built): CubeOSApps/prebuilts/{CubeApp,CubeMessages,CubePhone}.
+# Prebuilt system_ext apps (Gradle-built): CubeOSApps/prebuilts/{CubeApp,CubeMessages,CubePhone,CubeCps}.
+# CubeCps = CPS, Cube Push Service: CubeOS's push (UnifiedPush) for CubeLine and AppHub apps,
+# a persistent system app with no notification (CubeLine stops background polling while it works).
 # Messages and Phone are privileged and presigned with the platform key; Cube App keeps its own
 # key. Each module pulls in its permission files through `required`.
 # The overlay makes Phone the default dialer and Messages the default SMS app.
@@ -24,7 +26,8 @@ ifneq ($(CUBE_LINE),false)
 PRODUCT_PACKAGES += \
     CubeApp \
     CubeMessages \
-    CubePhone
+    CubePhone \
+    CubeCps
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/lineage/overlay/cubeline
 
